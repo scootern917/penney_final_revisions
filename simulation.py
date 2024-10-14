@@ -1,7 +1,8 @@
+
 def generate_sequence(seed: int, seq: list) -> str:
 '''Takes unshuffled deck as input and outputs string version of shuffled deck.''' np.random.seed(seed)
-np.random.shuffle(seq)
-return ''.join(map(str,seq))
+    np.random.shuffle(seq)
+    return ''.join(map(str,seq))
 def generate_data(n):
 '''Takes in number of simulations to be run, and shuffles deck n times'''
     if(os.path.exists("deck_data.npy")):
