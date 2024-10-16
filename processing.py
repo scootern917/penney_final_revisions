@@ -78,7 +78,7 @@ def calculate_winner(p1_cards: int,
             tricks_draw = 1
         return cards_winner, cards_draw, tricks_winner, tricks_draw
 
-
+##need to edit this one to save in json file based on specs 
 def play_one_deck(deck: str,
                   data: str):
     '''The function takes the deck string as an input and the file path to the data folder.
