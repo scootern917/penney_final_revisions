@@ -7,25 +7,35 @@ def generate_sequence(seed: int, seq: list) -> str:
     
     np.random.seed(seed)
     np.random.shuffle(seq)
-    return ''.join(map(str,seq))
+    return ''.join(seq)
 
 #need to run with 1,000,000 iterations
 def generate_data(n):
     '''Takes in number of simulations to be run, and shuffles deck n times'''
 
-    if(os.path.exists("deck_data.npy")):
+    if (os.path.exists("deck_data.npy")):
         deck_data = np.load("deck_data.npy", allow_pickle = True)
+        seeds = list(deck_data[0])
+        decks = list(deck_data[1])
     else:
-        deck_data = np.zeros((0, 2))
-    seed = deck_data.shape[0]
-    sequence = [1] * 26 + [0] * 26
-    for x in (range(n)):
+        seeds = []
+        decks = []
+
+    seed = len(seeds)
+    sequence = ['1'] * 26 + ['0'] * 26
+    for i in (range(n)):
+
         np.random.seed(seed)
         shuffled_deck = generate_sequence(seed, sequence)
-        new_row = np.array([seed, shuffled_deck], dtype=object)
-        deck_data = np.vstack([deck_data, new_row])
-        seed+=1
-        if x%10000 == 0:
+
+        seeds += [seed]
+        decks += [shuffled_deck]
+
+        seed += 1
+
+        if i%10000 == 0:
             clear_output()
-            print(x)
+            print(i)
+
+    deck_data = np.array([seeds, decks])
     np.save("deck_data.npy", deck_data)
