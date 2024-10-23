@@ -9,7 +9,6 @@ def generate_sequence(seed: int, seq: list) -> str:
     np.random.shuffle(seq)
     return ''.join(seq)
 
-#need to run with 1,000,000 iterations
 def generate_data(n):
     '''Takes in number of simulations to be run, and shuffles deck n times'''
 
