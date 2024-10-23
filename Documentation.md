@@ -15,7 +15,7 @@ Below, you may read the documentation on how our group approached simulating the
 - `RunEverything.ipynb`
 
 ## Simulation.py
-The RunSimulation file will simulate the shuffling of decks of cards and save the results as a `.npy` file.
+The Simulation file will simulate the shuffling of decks of cards and save the results as a `.npy` file.
 
 `generate_data(n)` ###is this right?
 
@@ -30,8 +30,8 @@ Functionality:
 
 ---
 
-## DataManagement.py
-The DataManagement file has several functions associated with storing and processing data for visualization purposes.
+## Processing.py
+The Processing file has several functions associated with storing and processing data for visualization.
 
 `load_process_simulations(path)`
 
@@ -121,10 +121,10 @@ Functionality:
 
 ---
 
-## DataVisualization.py
+## Visualization.py
 
 
-The DataVisualization file helps with generating and saving heatmaps for the probability of player 1 winning for every possible combination of color card sequences.
+The Visualization file helps with generating and saving heatmaps for the probability of player 1 winning for every possible combination of color card sequences.
 
 Note that the **title of the heatmaps contains an approximation** of the amount of games played. This number is taken from one of the variations. It is approximate because ties are dropped from the data, meaning that each game variation may have slightly different amounts of actual finished, non-tying games.
 
@@ -154,6 +154,6 @@ The RunEverything notebook allows you, the FLB, to simply run a few lines of cod
 
 ---
 
-
+## do we need this still?
 ## The Goal / Moving Forward
 Looking at the probabilities of the two version of the penney's game, we can see that while there are differences in some of the percentages for player 1 winning, overall the heatmap shows a similar pattern between both games. This may sort of highlight the idea that no matter what variation of the penney's game are played, the same pattern of some sequences having a more or less advantage exists. Based on our heatmaps, there are some clear instances where one type of sequence from player 1 may beat player 2, but collectively we thought that if the type of sequence chosen was privately that brings a lot of random chance into question. Which ever person chooses the optimal sequence at that point is more likely to win. This could also mean that since there are certain sequences that are more likely to win than others, that might lower the choices one player may take in order to have a more likely chance to win overall games played. 
