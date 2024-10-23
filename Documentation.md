@@ -23,9 +23,9 @@ Parameters:
 - `n` (`int`): number of simulations to be created
 
 Functionality:
-- Creates decks of red and black cards, represented by 52 bits, where `0` is red and `1` is black.
+- Creates decks of red and black cards, represented by 52 bits, where `0` is black and `1` is red. Each deck has a different has a different seed. 
 - The 52 bits are shuffled, to represent a random deck with 26 black and 26 red cards.
-- Saves the decks as integers and stores them in a `.npy` file.
+- The decks and their seeds are saved to an `npy` file 
 
 
 ---
