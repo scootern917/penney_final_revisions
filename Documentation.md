@@ -7,17 +7,17 @@ The **first variation** tallies the **total number of cards** from the initial d
 
 The **second variation** counts the **number of "tricks" a player scores** in a game. Each time a player's sequence appears, their number of tricks increases by 1, repeated until the deck runs out.
 
-Below, you may read the documentation on how our group approached simulating the game, managing/storing our data, and visualizing our data as a heatmap. The project includes four files:
+Below, you may read the documentation on how our group approached simulating the game, managing/storing our data, and visualizing our data as a heatmap. The project includes # files:
 
-- `RunSimulation.py`
-- `DataManagement.py`
-- `DataVisualization.py`
+- `Simulation.py`
+- `Processing.py`
+- `Visualization.py`
 - `RunEverything.ipynb`
 
-## RunSimulation.py
+## Simulation.py
 The RunSimulation file will simulate the shuffling of decks of cards and save the results as a `.npy` file.
 
-`generate_simulation_results(num_iter, output_filename, path)`
+`generate_simulation_results(num_iter, output_filename, path)` ###change
 
 Parameters:
 - `num_iter` (`int`): the number of decks to create
