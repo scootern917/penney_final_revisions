@@ -1,3 +1,12 @@
+import json
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly.graph_objects as go
+import plotly.express as px
+
+
 def __make_annots(wins:np.ndarray, ties:np.ndarray):
     '''
     Generate annotations for heatmap values.
@@ -94,25 +103,25 @@ def get_heatmaps(format:str) -> None:
         format: Takes 'html' or 'png' as input. Determines file format of the saved heatmap.
     '''
     # Get data
-    with open('results/results.json') as json_file:
+    with open('data/results.json') as json_file:
         data = json.load(json_file)
-    cards = data['cards']
-    cards_ties = data['cards_ties']
-    tricks = data['tricks']
-    tricks_ties = data['tricks_ties']
+    cards = np.array(data['cards'])
+    cards_ties = np.array(data['cards_ties'])
+    tricks = np.array(data['tricks'])
+    tricks_ties = np.array(data['tricks_ties'])
     N = data['N']
         
     if format == 'html':
         # Variation 1
-        cards_fig = __prepare_html(cards, cards_ties, title=f'My Chance of Winning by Cards<br />(from {n} Random Decks) [Win(Tie)]')
-        path = 'test/v4cards.html'
+        cards_fig = __prepare_html(cards, cards_ties, title=f'My Chance of Winning by Cards<br />(from {N} Random Decks) [Win(Tie)]')
+        path = 'figs/cards.html'
         cards_fig.write_html(path)
         print(f'{path} saved successfully.')
         cards_fig.show()
         
         # Variation 2
         tricks_fig = __prepare_html(cards, cards_ties, title=f'My Chance of Winning by Tricks<br />(from {N} Random Decks) [Win(Tie)]')
-        path = 'test/v4tricks.html'
+        path = 'figs/tricks.html'
         tricks_fig.write_html(path)
         print(f'{path} saved successfully.')
         tricks_fig.show()
@@ -148,4 +157,5 @@ def get_heatmaps(format:str) -> None:
         
         # Add caption
         fig.suptitle('Cell text are formatted as follows: Chance of Win (Chance of Tie)', x=0.3, y=0.01)
+        fig.savefig('figs/heatmaps.png')
     return
