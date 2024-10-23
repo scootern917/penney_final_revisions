@@ -17,7 +17,7 @@ Below, you may read the documentation on how our group approached simulating the
 ## Simulation.py
 The Simulation file will simulate the shuffling of decks of cards and save the results as a `.npy` file.
 
-`generate_data(n)` ###is this right?
+`generate_data(n)`
 
 Parameters:
 - `n` (`int`): number of simulations to be created
@@ -128,24 +128,14 @@ The Visualization file helps with generating and saving heatmaps for the probabi
 
 Note that the **title of the heatmaps contains an approximation** of the amount of games played. This number is taken from one of the variations. It is approximate because ties are dropped from the data, meaning that each game variation may have slightly different amounts of actual finished, non-tying games.
 
-`generate_heatmap`
+`get_heatmaps`
 
 Parameters:
-- `data`: This is the DataFrame that contains the total results
-- `filename`: Name of the file where the heatmap is saved
-- `vmin`, `vmax`: Win percentage value bounds for the color scale in the heatmap
-- `title`: Title text of the heatmap 
-
+- `format`: Takes 'html' or 'png' as input. Determines file format of the saved heatmap
 
 Functionality:
-
-- Takes dataframe of the total Penney's game simulation
-- Creates 8 by 8 matrix comparing Player 1 and Player 2
-- Fills the matrix with each of the winning probabilities
-- The heatmap is created after visualizing the annotated 8 by 8 matrix
-- The dark diagonal on the heatmap is set for the sequences that match
-- The heatmap is labeled with proper percentages of player 1 wins for each sequence 
-- Darker colors represent a higher winning probability; lighter colors represent a lower winning probability
+- Saves a png or two html files that show heatmap visualizations of the simulation results.
+- Both options include two heatmaps, one for each game variation.
 
 ---
 
