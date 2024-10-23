@@ -17,13 +17,10 @@ Below, you may read the documentation on how our group approached simulating the
 ## Simulation.py
 The RunSimulation file will simulate the shuffling of decks of cards and save the results as a `.npy` file.
 
-`generate_simulation_results(num_iter, output_filename, path)` ###change
+`generate_data(n)` ###is this right?
 
 Parameters:
-- `num_iter` (`int`): the number of decks to create
-- `output_filename` (`str`): the file to save the decks in
-- `seed`: the seed to use for random generation
-- `path` (`str`, optional): the path to save the file in. Defaults to `'data'`
+- `n` (`int`): number of simulations to be created
 
 Functionality:
 - Creates decks of red and black cards, represented by 52 bits, where `0` is red and `1` is black.
