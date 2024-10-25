@@ -20,6 +20,9 @@ For more background, check out these resources:
 - Humble Nishiyama's Paper: https://www.datascienceassn.org/sites/default/files/Humble-Nishiyama%20Randomness%20Game%20-%20A%20New%20Variation%20on%20Penney%27s%20Coin%20Game.pdf
 - Fun Video on Penney's Game: https://www.youtube.com/watch?v=s4tyO4V2im8
 
+## Getting Started
+Before running this project yourself, you can first start by familiarizing yourself with the files below or running the [run_all file](./run_all). In this file you should start by running the simulation script and generating the necessary data for the later processing and visualization parts.  
+
 ## Simulation.py
 The Simulation file will simulate the shuffling of decks of cards and save the results as a `.npy` file.
 
