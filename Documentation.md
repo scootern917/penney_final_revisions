@@ -10,10 +10,10 @@ The **second variation** counts the **number of "tricks" a player scores** in a 
 
 Below, you may read the documentation on how our group approached simulating the game, managing/storing our data, and visualizing our data as a heatmap. The project includes # files:
 
-- `Simulation.py`
-- `Processing.py`
-- `Visualization.py`
-- `RunEverything.ipynb`
+- `simulation.py`
+- `processing.py`
+- `visualization.py`
+- `runeverything.ipynb`
 
 For more background, check out these resources:
 - Penney's Game Wikipedia Page: https://en.wikipedia.org/wiki/Penney%27s_game
@@ -24,55 +24,75 @@ For more background, check out these resources:
 Before running this project yourself, you can first start by familiarizing yourself with the files below or running the [run_all file](./run_all.ipynb). In this file you should start by running the simulation script and generating the necessary data for the later processing and visualization parts.  
 
 ## Simulation.py
-The Simulation file will simulate the shuffling of decks of cards and save the results as a `.npy` file.
 
-`generate_data(n)`
+`generate_sequence(seed: int, seq: list) -> str:`
 
 Parameters:
-- `n` (`int`): number of simulations to be created
+
+- `seed` : random seed number used to shuffle the sequence
+- `seq` : sequence to be shuffled
+
+Returns:
+
+- `str`: shuffled sequence as a string
+
+
+`generate_data(n: int) -> None:`
+
+Parameters:
+
+- `n` : number of simulations to be created
+
+Returns: `None`
 
 Functionality:
 - Creates decks of red and black cards, represented by 52 bits, where `0` is black and `1` is red. Each deck has a different has a different seed. 
 - The 52 bits are shuffled, to represent a random deck with 26 black and 26 red cards.
-- The decks and their seeds are saved to an `npy` file 
+- The decks and their seeds are saved as a 2D array into an `.npy` file 
 
 
 ---
 
 ## Processing.py
+
 The Processing file has several functions associated with storing and processing data for visualization.
 
-`load_process_simulations(path)`
+`load_process_simulations(path: str) -> list:`
 
 Parameter:
+
 - `path` (`str`): the location of the simulation data from the previous step
 
-  
+Returns: 
+
+- List of binary strings
+
 Functionality:
+
 - Loads simulation data from specified file
 - Converts each integer in file to 52-bit binary string
-- Returns a list of the binary strings
 
-
-`variation1`
+`variation1(deck: str, player1_sequence: str, player2_sequence: str) -> list[int]:`
 
 Parameters:
-- `deck` (`str`): deck of cards as binary sequence
-- `player1_sequence` (`str`): 3-bit sequence for player 1
-- `player2_sequence` (`str`): 3-bit sequence for player 2
+- `deck`: deck of cards as binary sequence
+- `player1_sequence`: 3-bit sequence for player 1
+- `player2_sequence`: 3-bit sequence for player 2
+
+Returns:
+- The number of **cards** collected by each player
 
 Functionality:
 - Initialize card counts and pile size
 - Iterates through the deck to check for matches with player sequences
 - If match is found, matching player receives cards in pile
-- Returns `player1_cards, player2_cards`: the number of **cards** collected by each player
 
-`variation2`
+`variation2(deck: str, player1_sequence: str, player2_sequence: str) -> list[int] `
 
 Parameters:
-- `deck` (`str`): deck of cards as binary sequence
-- `player1_sequence` (`str`): 3-bit sequence for player 1
-- `player2_sequence` (`str`): 3-bit sequence for player 2
+- `deck` : deck of cards as binary sequence
+- `player1_sequence` : 3-bit sequence for player 1
+- `player2_sequence` : 3-bit sequence for player 2
 
 Functionality:
 - Initialize trick counters for both players
@@ -81,10 +101,13 @@ Functionality:
 - Returns `player1_tricks, player2_tricks`: number of **tricks** won by each player
 
 
-`analyze_all_combinations`
+`analyze_all_combinations(simulations: list[string])`
 
 Parameter:
 - `simulations`: list of binary strings representing games
+
+Returns:
+- 🔴FILL THIS IN 🔴
 
 Functionality:
 - Generates all possible player 1 and player 2 sequence combinations 
@@ -92,15 +115,23 @@ Functionality:
 - Compiles results into two DataFrames, one for each variation
 
 
-`combine_past_data`
+`combine_past_data(new_var1: pandas.DataFrame, 
+                   new_var2: pandas.DataFrame, 
+                   var1_existing_filename: str, 
+                   var1_existing_filename: str, 
+                   filder: str (optional)) -> pandas.DataFrame, pandas.DataFrame`
 
 Parameters:
-- `new_var1` (`pandas.DataFrame`): New simulation data to be added to old data for variation 1.
-- `new_var2` (`pandas.DataFrame`): New simulation data to be added to old data for variation 2.
-- `var1_existing_filename` (`str`): The CSV file containing the old data for variation 1.
-- `var2_existing_filename` (`str`): The CSV file containing the old data for variation 2.
-- `folder` (`str`, optional): Path to the folder containing the CSV files to process. Default is `data`.
+- `new_var1` : New simulation data to be added to old data for variation 1.
+- `new_var2` : New simulation data to be added to old data for variation 2.
+- `var1_existing_filename` : The CSV file containing the old data for variation 1.
+- `var2_existing_filename` : The CSV file containing the old data for variation 2.
+- `folder` : Path to the folder containing the CSV files to process. Default is `data`.
 
+Returns:
+
+- `pandas.DataFrame`: updated DataFrame with all variation 1 data
+- `pandas.DataFrame`: updated DataFrame with all variation 2 data
   
 Functionality:
 - Initializes combined DataFrames for each variation using existing data
@@ -108,24 +139,24 @@ Functionality:
 - Reads CSVs, ensures sequences are 3 digits long, determines which variation the file belongs to, updates corresponding combined DataFrame using `update_dataframe` function
 - Resets index of combined DataFrames
 - Saves updated DataFrames to CSV files 
-- Returns the two updated DataFrames 
 
 
-`update_dataframe`
+`update_dataframe(existing_df: pandas.DataFrame, new_df: pandas.DataFrame) -> pandas.DataFrame`
 
 
 Parameters:
-- `existing_df` (`pandas.DataFrame`): Existing DataFrame to be updated
-- `new_df` (`pandas.DataFrame`): DataFrame containing data to be merged
+- `existing_df`: Existing DataFrame to be updated
+- `new_df`: DataFrame containing data to be merged
 
+Returns:
+
+- `pandas.DataFrame` - containing all data merged and recalculated win percentages
 
 Functionality:
 - If the existing DataFrame is empty, it returns the new DataFrame
 - Finds common columns between existing and new DataFrames
 - Updates existing DataFrame with values from common columns in new DataFrame
 - Recalculates the ‘Player 1 Win %’ based on updated win counts 
-- Returns updated DataFrame with merged data and recalculated win percentages 
-
 
 
 ---
@@ -137,10 +168,15 @@ The Visualization file helps with generating and saving heatmaps for the probabi
 
 Note that the **title of the heatmaps contains an approximation** of the amount of games played. This number is taken from one of the variations. It is approximate because ties are dropped from the data, meaning that each game variation may have slightly different amounts of actual finished, non-tying games.
 
-`get_heatmaps`
+`get_heatmaps(format: str) -> None:`
 
 Parameters:
+
 - `format`: Takes 'html' or 'png' as input. Determines file format of the saved heatmap
+
+Returns:
+
+- `None`
 
 Functionality:
 - Saves a png or two html files that show heatmap visualizations of the simulation results.
