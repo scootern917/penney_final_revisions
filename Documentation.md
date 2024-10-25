@@ -2,7 +2,7 @@
 "Alone we can do so little; together we can do so much." – Helen Keller
 
 ## Overview
-Penney's Game is played by two players and one deck of cards. Each player chooses a three-card sequence of colors (i.e. Red or Black) and cards are drawn face-up until one of the selected sequences appear (i.e. RRR, or BRB). Penney's game has two variations. 
+Penney's Game is a competitive, probability-based game typically played between two players who select distinct three-card sequences (combinations of Red or Black). As cards are drawn, the first appearance of one of the selected sequences determines the winner of that round. There are two main variations of the game:
 
 The **first variation** tallies the **total number of cards** from the initial draw until a chosen sequence appears. All cards in the pile are given to the player whose sequence appears. This is repeated until the deck runs out; any cards remaining in the pile at the end are not tallied.
 
@@ -14,6 +14,11 @@ Below, you may read the documentation on how our group approached simulating the
 - `Processing.py`
 - `Visualization.py`
 - `RunEverything.ipynb`
+
+For more background, check out these resources:
+- Penney's Game Wikipedia Page: https://en.wikipedia.org/wiki/Penney%27s_game
+- Humble Nishiyama's Paper: https://www.datascienceassn.org/sites/default/files/Humble-Nishiyama%20Randomness%20Game%20-%20A%20New%20Variation%20on%20Penney%27s%20Coin%20Game.pdf
+- Fun Video on Penney's Game: https://www.youtube.com/watch?v=s4tyO4V2im8
 
 ## Simulation.py
 The Simulation file will simulate the shuffling of decks of cards and save the results as a `.npy` file.
