@@ -37,4 +37,4 @@ def generate_data(n):
             print(i)
 
     deck_data = np.array([seeds, decks])
-    np.save("deck_data.npy", deck_data)
+    np.save("data/deck_data.npy", deck_data)
