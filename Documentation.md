@@ -1,4 +1,5 @@
 # Project Penney
+"Alone we can do so little; together we can do so much." – Helen Keller
 
 ## Overview
 Penney's Game is played by two players and one deck of cards. Each player chooses a three-card sequence of colors (i.e. Red or Black) and cards are drawn face-up until one of the selected sequences appear (i.e. RRR, or BRB). Penney's game has two variations. 
