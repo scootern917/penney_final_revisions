@@ -9,7 +9,7 @@ def generate_sequence(seed: int, seq: list) -> str:
     np.random.shuffle(seq)
     return ''.join(seq)
 
-def generate_data(n):
+def generate_data(n: int) -> None:
     '''Takes in number of simulations to be run, and shuffles deck n times'''
 
     if (os.path.exists("deck_data.npy")):
