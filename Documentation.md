@@ -168,7 +168,7 @@ results/: This directory contains a single file, results.json, summarizing the o
 
 ## Details
 
-Random Data Generation
+### Random Data Generation
 The generate_data(n) function in Simulation.py generates n simulated decks of cards. Here’s how it works:
 
 Deck Composition: Each deck declared consists of 52 cards (26 red and 26 black), represented as a binary sequence of 52 bits, where 1 represents a red card and 0 represents a black card.
@@ -191,7 +191,7 @@ The process_all_decks function tests every possible combination of player sequen
 Results Presentation
 The simulation results are presented through heatmaps created in Visualization.py. Each heatmap shows the win probability for Player 1 across all sequence combinations:
 
-Figure Format: 
+### Figure Format: 
 The visualizations for Project Penney are based on player win probabilities and tie counts, presented as heatmaps. These visualizations are created using the data stored in results/results.json, which contains five key elements:
 
 'cards': Win probabilities by cards
