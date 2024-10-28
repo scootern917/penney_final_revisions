@@ -56,20 +56,20 @@ Functionality:
 
 The Processing file has several functions associated with storing and processing data for visualization.
 
-`load_decks(path: str) -> list:`
+`load_decks(path: str) -> numpy.ndarray:`
 
 Parameter:
 
-- `path` (`str`): the location of the simulation data from the previous step
+- `path` (`str`): the location of the simulation data .npy file
 
 Returns: 
 
-- List of binary strings
+- array of simulations
 
 Functionality:
 
 - Loads simulation data from specified file
-- Converts simulation and seed data to list of simulations
+- isolates decks
 
 `score_deck(score_deck(deck, seq1, seq2, deck_length)`
 
@@ -77,55 +77,43 @@ Parameters:
 - `deck`: deck of cards 
 - `seq1`: 3-bit sequence for player 1
 - `seq2`: 3-bit sequence for player 2
+- `deck_length`: length of deck to process (minus 2) 
 
 Returns:
-- The number of **cards** collected by each player
+- tuple containing the number of cards and tricks won by each player 
 
 Functionality:
 - Initialize card counts and pile size
 - Iterates through the deck to check for matches with player sequences
 - If match is found, matching player receives cards in pile
 
-`variation2(deck: str, player1_sequence: str, player2_sequence: str) -> list[int] `
-
-Parameters:
-- `deck` : deck of cards as binary sequence
-- `player1_sequence` : 3-bit sequence for player 1
-- `player2_sequence` : 3-bit sequence for player 2
-
-Functionality:
-- Initialize trick counters for both players
-- Iterates through deck to check for matches with player sequences
-- When a match is found, matching player scores one trick
-- Returns `player1_tricks, player2_tricks`: number of **tricks** won by each player
-
-
-`analyze_all_combinations(simulations: list[string])`
+`calculate_winner(p1_cards, p2_cards, p1_tricks, p2_tricks) -> tuple[int, int, int, int]`
 
 Parameter:
-- `simulations`: list of binary strings representing games
+- `p1_cards`: number of cards from player 1
+- `p2_cards`: number of cards from player 2
+- `p1_tricks`: number of tricks from player 1
+- `p2_tricks`: number of tricks from player 2
 
 Returns:
-- 🔴FILL THIS IN 🔴
+- tuple containing:
+- `cards_winner`: 1 if player 1 won cards, 0 otherwise
+- `cards_draw`: 1 if cards are tied, 0 otherwise
+- `tricks_winner`: 1 if player 1 won tricks, 0 otherwise
+- `tricks_draw`: 1 if tricks are tied, 0 otherwise
 
 Functionality:
-- Generates all possible player 1 and player 2 sequence combinations 
-- For each unique pair of sequences it simulations both variations of the game for each deck in simulations, counts wins for each player in both variations, and calculates win percentages
-- Compiles results into two DataFrames, one for each variation
+- Compares card and trick counts between players to determine who won based on tricks, cards, and/or if there is a tie 
 
 
-`combine_past_data(new_var1: pandas.DataFrame, 
-                   new_var2: pandas.DataFrame, 
-                   var1_existing_filename: str, 
-                   var1_existing_filename: str, 
-                   filder: str (optional)) -> pandas.DataFrame, pandas.DataFrame`
+`process_deck_batch(deck, valid_pairs, deck_length_minus2) -> tuple[numpy.ndarray, numpy.ndarray, numpy.ndarray, numpy.ndarray]`
 
 Parameters:
-- `new_var1` : New simulation data to be added to old data for variation 1.
-- `new_var2` : New simulation data to be added to old data for variation 2.
-- `var1_existing_filename` : The CSV file containing the old data for variation 1.
-- `var2_existing_filename` : The CSV file containing the old data for variation 2.
-- `folder` : Path to the folder containing the CSV files to process. Default is `data`.
+- `deck` : Binary sequence representing the deck
+- `valid_pairs` : List of valid sequence pairs to test
+- `deck_length_minus2` : deck length minus 2 for optimization
+
+## below here has not been updated for processing 
 
 Returns:
 
