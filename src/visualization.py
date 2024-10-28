@@ -95,23 +95,25 @@ def __create_seaborn(data:np.ndarray, annots:np.ndarray,
     return fig, ax
 
     
-def get_heatmaps(format:str = "html") -> None:
+def get_heatmaps(format:str = "html", results_path:str = "results/results.json") -> None:
     '''
     Produces two heatmaps using the data in the results folder.
 
     Args:
         format: Takes 'html' or 'png' as input. Determines file format of the saved heatmap.
+        results_path: Defaults to results/results.json. Path to the results file to make heatmaps with.
     
     Returns:
         None: Saves the heatmap in the specified format.
     '''
     # Get data
-    with open('../results/results.json') as json_file:
+    with open(results_path) as json_file:
         data = json.load(json_file)
-    cards = np.array(data['cards'])
-    cards_ties = np.array(data['cards_ties'])
-    tricks = np.array(data['tricks'])
-    tricks_ties = np.array(data['tricks_ties'])
+    
+    cards = np.array(data['cards']) * 100
+    cards_ties = np.array(data['cards_ties']) * 100
+    tricks = np.array(data['tricks']) * 100
+    tricks_ties = np.array(data['tricks_ties']) * 100
     n = data['n']
         
     if format == 'html':
