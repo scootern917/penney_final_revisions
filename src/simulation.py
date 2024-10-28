@@ -25,7 +25,7 @@ def generate_data(num_iterations: int) -> None:
     
     for i in tqdm(range(num_iterations)):
         seed = i + 1  # Start seed at 1 and increment by 1 for each iteration
-        shuffled_deck = generate_sequence(deck, seed)  # Shuffle the deck with the current seed
+        shuffled_deck = __generate_sequence(deck, seed)  # Shuffle the deck with the current seed
         results[i] = [seed, int(''.join(shuffled_deck), 2)]  # Store seed and shuffled deck as binary integer
 
     # Generate the filename with num_iterations and current date and time
@@ -39,7 +39,7 @@ def generate_data(num_iterations: int) -> None:
     print(f"{num_iterations} new decks saved to {filename}")
 
 
-def generate_sequence(seq: str, seed: int) -> List[str]:
+def __generate_sequence(seq: str, seed: int) -> List[str]:
     """
     Generates a shuffled sequence (deck) based on a seed.
 

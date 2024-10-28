@@ -95,33 +95,36 @@ def __create_seaborn(data:np.ndarray, annots:np.ndarray,
     return fig, ax
 
     
-def get_heatmaps(format:str) -> None:
+def get_heatmaps(format:str = "html") -> None:
     '''
     Produces two heatmaps using the data in the results folder.
 
     Args:
         format: Takes 'html' or 'png' as input. Determines file format of the saved heatmap.
+    
+    Returns:
+        None: Saves the heatmap in the specified format.
     '''
     # Get data
-    with open('data/results.json') as json_file:
+    with open('results/results.json') as json_file:
         data = json.load(json_file)
     cards = np.array(data['cards'])
     cards_ties = np.array(data['cards_ties'])
     tricks = np.array(data['tricks'])
     tricks_ties = np.array(data['tricks_ties'])
-    N = data['N']
+    n = data['n']
         
     if format == 'html':
         # Variation 1
-        cards_fig = __prepare_html(cards, cards_ties, title=f'My Chance of Winning by Cards<br />(from {N} Random Decks) [Win(Tie)]')
-        path = 'figs/cards.html'
+        cards_fig = __prepare_html(cards, cards_ties, title=f'My Chance of Winning by Cards<br />(from {n} Random Decks) [Win(Tie)]')
+        path = 'figures/cards.html'
         cards_fig.write_html(path)
         print(f'{path} saved successfully.')
         cards_fig.show()
         
         # Variation 2
-        tricks_fig = __prepare_html(cards, cards_ties, title=f'My Chance of Winning by Tricks<br />(from {N} Random Decks) [Win(Tie)]')
-        path = 'figs/tricks.html'
+        tricks_fig = __prepare_html(cards, cards_ties, title=f'My Chance of Winning by Tricks<br />(from {n} Random Decks) [Win(Tie)]')
+        path = 'figures/tricks.html'
         tricks_fig.write_html(path)
         print(f'{path} saved successfully.')
         tricks_fig.show()
@@ -139,14 +142,14 @@ def get_heatmaps(format:str) -> None:
         # Left heatmap
         cards_annots = __make_annots(cards, cards_ties)
         __create_seaborn(cards, cards_annots, ax[0], 
-                         title=f'My Chance of Winning by Cards\n(from {N} Random Decks)')
+                         title=f'My Chance of Winning by Cards\n(from {n} Random Decks)')
         ax[0].set_xlabel('Me', fontsize=LABEL_SIZE)
         ax[0].set_ylabel('Opponent', fontsize=LABEL_SIZE)
     
         # Right heatmap
         tricks_annots = __make_annots(tricks, tricks_ties)
         __create_seaborn(tricks, tricks_annots, ax[1], 
-                         title=f'My Chance of Winning by Tricks\n(from {N} Random Decks)',
+                         title=f'My Chance of Winning by Tricks\n(from {n} Random Decks)',
                          hide_yticks=True)
         ax[1].set_xlabel('Me', fontsize=LABEL_SIZE)
     
@@ -157,5 +160,5 @@ def get_heatmaps(format:str) -> None:
         
         # Add caption
         fig.suptitle('Cell text are formatted as follows: Chance of Win (Chance of Tie)', x=0.3, y=0.01)
-        fig.savefig('figs/heatmaps.png')
+        fig.savefig('figures/heatmaps.png')
     return
