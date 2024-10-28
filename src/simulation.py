@@ -4,12 +4,13 @@ from typing import List
 from datetime import datetime
 import os
 
-def generate_data(num_iterations: int) -> None:
+def generate_data(num_iterations: int, verbose_name = False) -> None:
     """
     Simulates shuffling a deck of red and black cards and saves the results.
 
     Parameters:
     - num_iterations: int, number of times to shuffle the deck and store the result.
+    - verbose_name: bool, if true, add a timestamp and num_iterations to the filename.
 
     Returns:
     - None: Saves results to a .npy file instead of returning a list.
@@ -26,13 +27,16 @@ def generate_data(num_iterations: int) -> None:
     for i in tqdm(range(num_iterations)):
         seed = i + 1  # Start seed at 1 and increment by 1 for each iteration
         shuffled_deck = __generate_sequence(deck, seed)  # Shuffle the deck with the current seed
-        results[i] = [seed, int(''.join(shuffled_deck), 2)]  # Store seed and shuffled deck as binary integer
+        results[i] = [seed, ''.join(shuffled_deck)]  # Store seed and shuffled deck
 
     # Generate the filename with num_iterations and current date and time
     current_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
 
     cwd = os.getcwd() # Current working directory
-    filename = f"{cwd}/data/deck_data_{num_iterations}_{current_datetime}.npy"
+    if verbose_name:
+        filename = f"{cwd}/data/deck_data_{num_iterations}_{current_datetime}.npy"
+    else:
+        filename = f"{cwd}/data/deck_data.npy"
     
     np.save(filename, results)  # Save the results array to a .npy file in the data subfolder
 
