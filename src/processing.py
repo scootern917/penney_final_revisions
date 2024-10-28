@@ -15,7 +15,7 @@ def load_decks(path):
     return data[:, 1]
 
 def score_deck(deck, seq1, seq2, deck_length):
-    """Optimized scoring function."""
+    """Scoring function."""
     p1_cards = p2_cards = 0
     p1_tricks = p2_tricks = 0
     pile = 2
@@ -58,7 +58,7 @@ def calculate_winner(p1_cards, p2_cards, p1_tricks, p2_tricks):
     return cards_winner, cards_draw, tricks_winner, tricks_draw
 
 def process_deck_batch(deck, valid_pairs, deck_length_minus2):
-    """Process a single deck for all valid pairs."""
+    """Process a single deck for valid pairs."""
     n_sequences = len(SEQUENCES)
     batch_cards_wins = np.zeros((n_sequences, n_sequences))
     batch_tricks_wins = np.zeros((n_sequences, n_sequences))
@@ -85,7 +85,7 @@ def process_deck_batch(deck, valid_pairs, deck_length_minus2):
     return batch_cards_wins, batch_tricks_wins, batch_cards_ties, batch_tricks_ties
 
 def process_all_decks(decks, deck_length=52):
-    """Process all decks with visible progress bar."""
+    """Process all decks."""
     n_sequences = len(SEQUENCES)
     total_decks = len(decks)
     deck_length_minus2 = deck_length - 2
