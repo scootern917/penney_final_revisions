@@ -108,10 +108,10 @@ def get_heatmaps(format:str = "html") -> None:
     # Get data
     with open('results/results.json') as json_file:
         data = json.load(json_file)
-    cards = np.array(data['cards'])
-    cards_ties = np.array(data['cards_ties'])
-    tricks = np.array(data['tricks'])
-    tricks_ties = np.array(data['tricks_ties'])
+    cards = np.array(data['cards']) * 100
+    cards_ties = np.array(data['cards_ties']) * 100
+    tricks = np.array(data['tricks']) * 100
+    tricks_ties = np.array(data['tricks_ties']) * 100
     n = data['n']
         
     if format == 'html':
