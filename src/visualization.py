@@ -106,7 +106,7 @@ def get_heatmaps(format:str = "html") -> None:
         None: Saves the heatmap in the specified format.
     '''
     # Get data
-    with open('results/results.json') as json_file:
+    with open('../results/results.json') as json_file:
         data = json.load(json_file)
     cards = np.array(data['cards'])
     cards_ties = np.array(data['cards_ties'])
