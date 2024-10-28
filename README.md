@@ -85,7 +85,7 @@ Returns:
 Functionality:
 - Initialize card counts and pile size
 - Iterates through the deck to check for matches with player sequences
-- If match is found, matching player receives cards in pile
+- If match is found, matching player receives cards in pile and updates trick count
 
 `calculate_winner(p1_cards, p2_cards, p1_tricks, p2_tricks) -> tuple[int, int, int, int]`
 
