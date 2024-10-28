@@ -117,14 +117,14 @@ def get_heatmaps(format:str = "html") -> None:
     if format == 'html':
         # Variation 1
         cards_fig = __prepare_html(cards, cards_ties, title=f'My Chance of Winning by Cards<br />(from {n} Random Decks) [Win(Tie)]')
-        path = 'figures/cards.html'
+        path = '../figures/cards.html'
         cards_fig.write_html(path)
         print(f'{path} saved successfully.')
         cards_fig.show()
         
         # Variation 2
         tricks_fig = __prepare_html(cards, cards_ties, title=f'My Chance of Winning by Tricks<br />(from {n} Random Decks) [Win(Tie)]')
-        path = 'figures/tricks.html'
+        path = '../figures/tricks.html'
         tricks_fig.write_html(path)
         print(f'{path} saved successfully.')
         tricks_fig.show()
@@ -160,5 +160,5 @@ def get_heatmaps(format:str = "html") -> None:
         
         # Add caption
         fig.suptitle('Cell text are formatted as follows: Chance of Win (Chance of Tie)', x=0.3, y=0.01)
-        fig.savefig('figures/heatmaps.png')
+        fig.savefig('../figures/heatmaps.png')
     return
