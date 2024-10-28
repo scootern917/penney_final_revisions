@@ -56,7 +56,7 @@ Functionality:
 
 The Processing file has several functions associated with storing and processing data for visualization.
 
-`load_process_simulations(path: str) -> list:`
+`load_decks(path: str) -> list:`
 
 Parameter:
 
@@ -69,14 +69,14 @@ Returns:
 Functionality:
 
 - Loads simulation data from specified file
-- Converts each integer in file to 52-bit binary string
+- Converts simulation and seed data to list of simulations
 
-`variation1(deck: str, player1_sequence: str, player2_sequence: str) -> list[int]:`
+`score_deck(score_deck(deck, seq1, seq2, deck_length)`
 
 Parameters:
-- `deck`: deck of cards as binary sequence
-- `player1_sequence`: 3-bit sequence for player 1
-- `player2_sequence`: 3-bit sequence for player 2
+- `deck`: deck of cards 
+- `seq1`: 3-bit sequence for player 1
+- `seq2`: 3-bit sequence for player 2
 
 Returns:
 - The number of **cards** collected by each player
