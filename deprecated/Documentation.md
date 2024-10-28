@@ -1,5 +1,5 @@
 # Project Penney
-"Alone we can do so little; together we can do so much." – Helen Keller
+OLD docs; see README for up to date docs
 
 ## Overview
 Penney's Game is a competitive, probability-based game typically played between two players who select distinct three-card sequences (combinations of Red or Black). As cards are drawn, the first appearance of one of the selected sequences determines the winner of that round. There are two main variations of the game:
