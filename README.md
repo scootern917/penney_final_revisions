@@ -200,7 +200,7 @@ Returns"
 Functionality: 
 - Creates formatted strings for each cell, diagonal cells (same sequences) to empty strings
 
-  `__prepare_html(wins: np.ndarray, ties: np.ndarray, title: str) -> go.Figure`
+`__prepare_html(wins: np.ndarray, ties: np.ndarray, title: str) -> go.Figure`
 
 Parameters 
 - `wins`: 8X8 numpy array of win percentages
