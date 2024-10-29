@@ -111,39 +111,52 @@ Functionality:
 Parameters:
 - `deck` : Binary sequence representing the deck
 - `valid_pairs` : List of valid sequence pairs to test
-- `deck_length_minus2` : deck length minus 2 for optimization
+- `deck_length_minus2` : Deck length minus 2 for optimization
 
-## below here has not been updated for processing 
 
 Returns:
 
-- `pandas.DataFrame`: updated DataFrame with all variation 1 data
-- `pandas.DataFrame`: updated DataFrame with all variation 2 data
+- tuple containing numpy arrays for card wins, trick wins, card ties, and trick ties of that batch
   
 Functionality:
-- Initializes combined DataFrames for each variation using existing data
-- Sets ‘Sequence 1’ and ‘Sequence 2’ as index
-- Reads CSVs, ensures sequences are 3 digits long, determines which variation the file belongs to, updates corresponding combined DataFrame using `update_dataframe` function
-- Resets index of combined DataFrames
-- Saves updated DataFrames to CSV files 
+- Initializes four 8X8 zero matrices
+- For each sequence pair it converts the sequence to their corresponding indices, calls score_deck and caculate_winner to get game outcomes and determine win/tie status, updates the corresponding matrices based on results 
 
 
-`update_dataframe(existing_df: pandas.DataFrame, new_df: pandas.DataFrame) -> pandas.DataFrame`
+`process_all_decks(decks, deck_length=52) -> dict`
 
 
 Parameters:
-- `existing_df`: Existing DataFrame to be updated
-- `new_df`: DataFrame containing data to be merged
+- `decks`: List of decks to process
+- `deck_length`: Length of deck (default 52)
 
 Returns:
 
-- `pandas.DataFrame` - containing all data merged and recalculated win percentages
+- dictionary containing the 8X8 matrices for car win, trick win, card ties, and trick ties probabilities as well as the total number of decks processed 
 
 Functionality:
-- If the existing DataFrame is empty, it returns the new DataFrame
-- Finds common columns between existing and new DataFrames
-- Updates existing DataFrame with values from common columns in new DataFrame
-- Recalculates the ‘Player 1 Win %’ based on updated win counts 
+- Initializes four 8X8 zero matrices for results
+- For each deck in the input it calls process deck batch to get results for this deck, and adds the results in the corresponding matricies
+- Converts raw counts to probabilities
+- Converts numpy arrays to JSON
+
+  `process_and_save_results(input_path, output_folder='results') -> dict`
+
+
+Parameters:
+- `input_path`: Path to input.npy file
+- `output_folder`: Folder to save results (default: results) 
+
+Returns:
+
+- dictionary containing processed results in the same format as `process_all_decks`
+
+Functionality:
+- Creates output folder if it doesn't exist
+- Loads deck data from specified .npy file
+- Processes all decks
+- Saves results to json file named `results.json` in output folder
+
 
 
 ---
