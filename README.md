@@ -64,28 +64,28 @@ Parameter:
 
 Returns: 
 
-- array of simulations
+- Array of simulations
 
 Functionality:
 
 - Loads simulation data from specified file
-- isolates decks
+- Isolates decks from seeds 
 
 `score_deck(score_deck(deck, seq1, seq2, deck_length)`
 
 Parameters:
-- `deck`: deck of cards 
+- `deck`: Deck of cards 
 - `seq1`: 3-bit sequence for player 1
 - `seq2`: 3-bit sequence for player 2
-- `deck_length`: length of deck to process (minus 2) 
+- `deck_length`: Length of deck to process (minus 2) 
 
 Returns:
-- tuple containing the number of cards and tricks won by each player 
+- Tuple containing the number of cards and tricks won by each player 
 
 Functionality:
 - Initialize card counts and pile size
 - Iterates through the deck to check for matches with player sequences
-- If match is found, matching player receives cards in pile and updates trick count
+- If match is found, matching player receives cards in pile and their trick count is updated
 
 `calculate_winner(p1_cards, p2_cards, p1_tricks, p2_tricks) -> tuple[int, int, int, int]`
 
@@ -96,7 +96,7 @@ Parameter:
 - `p2_tricks`: number of tricks from player 2
 
 Returns:
-- tuple containing:
+- Tuple containing:
 - `cards_winner`: 1 if player 1 won cards, 0 otherwise
 - `cards_draw`: 1 if cards are tied, 0 otherwise
 - `tricks_winner`: 1 if player 1 won tricks, 0 otherwise
@@ -116,7 +116,7 @@ Parameters:
 
 Returns:
 
-- tuple containing numpy arrays for card wins, trick wins, card ties, and trick ties of that batch
+- Tuple containing numpy arrays for card wins, trick wins, card ties, and trick ties of that batch
   
 Functionality:
 - Initializes four 8X8 zero matrices
@@ -132,7 +132,7 @@ Parameters:
 
 Returns:
 
-- dictionary containing the 8X8 matrices for car win, trick win, card ties, and trick ties probabilities as well as the total number of decks processed 
+- Dictionary containing the 8X8 matrices for car win, trick win, card ties, and trick ties probabilities as well as the total number of decks processed 
 
 Functionality:
 - Initializes four 8X8 zero matrices for results
@@ -149,7 +149,7 @@ Parameters:
 
 Returns:
 
-- dictionary containing processed results in the same format as `process_all_decks`
+- Dictionary containing processed results in the same format as `process_all_decks`
 
 Functionality:
 - Creates output folder if it doesn't exist
