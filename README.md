@@ -56,6 +56,7 @@ Functionality:
 
 The Processing file has several functions associated with storing and processing data for visualization.
 
+
 `load_decks(path: str) -> numpy.ndarray:`
 
 Parameter:
@@ -70,6 +71,7 @@ Functionality:
 
 - Loads simulation data from specified file
 - Isolates decks from seeds 
+
 
 `score_deck(score_deck(deck, seq1, seq2, deck_length)`
 
@@ -86,6 +88,7 @@ Functionality:
 - Initialize card counts and pile size
 - Iterates through the deck to check for matches with player sequences
 - If match is found, matching player receives cards in pile and their trick count is updated
+
 
 `calculate_winner(p1_cards, p2_cards, p1_tricks, p2_tricks) -> tuple[int, int, int, int]`
 
@@ -104,6 +107,7 @@ Returns:
 
 Functionality:
 - Compares card and trick counts between players to determine who won based on tricks, cards, and/or if there is a tie 
+
 
 
 `process_deck_batch(deck, valid_pairs, deck_length_minus2) -> tuple[numpy.ndarray, numpy.ndarray, numpy.ndarray, numpy.ndarray]`
@@ -125,7 +129,6 @@ Functionality:
 
 `process_all_decks(decks, deck_length=52) -> dict`
 
-
 Parameters:
 - `decks`: List of decks to process
 - `deck_length`: Length of deck (default 52)
@@ -139,6 +142,7 @@ Functionality:
 - For each deck in the input it calls process deck batch to get results for this deck, and adds the results in the corresponding matricies
 - Converts raw counts to probabilities
 - Converts numpy arrays to JSON
+
 
   `process_and_save_results(input_path, output_folder='results') -> dict`
 
@@ -157,8 +161,6 @@ Functionality:
 - Processes all decks
 - Saves results to json file named `results.json` in output folder
 
-
-
 ---
 
 ## Visualization.py
@@ -168,11 +170,13 @@ The Visualization file helps with generating and saving heatmaps for the probabi
 
 Note that the **title of the heatmaps contains an approximation** of the amount of games played. This number is taken from one of the variations. It is approximate because ties are dropped from the data, meaning that each game variation may have slightly different amounts of actual finished, non-tying games.
 
-`get_heatmaps(format: str) -> None:`
+
+`get_heatmaps(format: str = "html", results_path: str = "results/results.json") -> None`
 
 Parameters:
 
 - `format`: Takes 'html' or 'png' as input. Determines file format of the saved heatmap
+- `results_path`: Path to JSON file containing game results 
 
 Returns:
 
@@ -181,6 +185,55 @@ Returns:
 Functionality:
 - Saves a png or two html files that show heatmap visualizations of the simulation results.
 - Both options include two heatmaps, one for each game variation.
+  
+  
+`__make_annots(wins: np.ndarray, ties: np.ndarray) -> np.ndarray`
+
+Parameters 
+- `wins`: 8X8 numpy array of win percentages
+- `ties`: 8x8 numpy array of tie percentages
+
+Returns"
+
+- 8x8 array of formatted strings in "Win(Tie)" format
+
+Functionality: 
+- Creates formatted strings for each cell, diagonal cells (same sequences) to empty strings
+
+  `__prepare_html(wins: np.ndarray, ties: np.ndarray, title: str) -> go.Figure`
+
+Parameters 
+- `wins`: 8X8 numpy array of win percentages
+- `ties`: 8x8 numpy array of tie percentages
+- `title`: Title for heatmap 
+
+Returns"
+
+- Interactive heatmap with blue color scale, hover tooltips showing player sequences, cell annotations showing win and tie percentages
+
+Functionality: 
+- Sets up blue color scale heatmap with tooltips with player sequence information
+- Adds win/tie annotations to each cell as well as a title and axis labels
+- Sets up grid spacing and background color and consistent sizing and styling
+
+
+ `__create_seaborn(data: np.ndarray, annots: np.ndarray, ax: plt.Axes = None, hide_yticks: bool = False, title: str = None) -> [plt.Figure, plt.Axes]`
+
+Parameters: 
+- `data`: 8x8 numpy array of percentages to visualize
+- `annots`: 8x8 numpy array of annotation strings
+- `ax`: Optional matplotlib axes to plot on
+- `hide_yticks`: Whether to hide y-axis ticks
+- `title`" Title for heatmap
+
+Returns:
+- tuple: (matplotlib.figure.Figure, matplotlib.axes.Axes)
+
+Functionality:
+- Generates a heatmap using Seaborn with blue color scheme
+- Sets up annotations with custom formatting, axis labels, and tick marks
+- Sets up consistent font sizing and styling  
+
 
 ---
 
