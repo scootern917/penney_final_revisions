@@ -144,7 +144,7 @@ Functionality:
 - Converts numpy arrays to JSON
 
 
-  `process_and_save_results(input_path, output_folder='results') -> dict`
+`process_and_save_results(input_path, output_folder='results') -> dict`
 
 
 Parameters:
