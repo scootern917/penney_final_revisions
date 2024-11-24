@@ -7,6 +7,13 @@ import plotly.graph_objects as go
 import plotly.express as px
 
 
+def __final_prep(data:list) -> np.ndarray:
+    data = np.array(data) # Cast
+    data = data*100 # Decimal to percent
+    np.fill_diagonal(data, np.nan) # Fill diagonal with NaN
+    data = np.flip(data, axis=1) # Flip such that origin is at the bottom-left
+    return data
+
 def __make_annots(wins:np.ndarray, ties:np.ndarray):
     '''
     Generate annotations for heatmap values.
@@ -110,10 +117,10 @@ def get_heatmaps(format:str = "html", results_path:str = "results/results.json")
     with open(results_path) as json_file:
         data = json.load(json_file)
     
-    cards = np.array(data['cards']) * 100
-    cards_ties = np.array(data['cards_ties']) * 100
-    tricks = np.array(data['tricks']) * 100
-    tricks_ties = np.array(data['tricks_ties']) * 100
+    cards = __final_prep(data['cards'])
+    cards_ties = __final_prep(data['cards_ties'])
+    tricks = __final_prep(data['tricks'])
+    tricks_ties = __final_prep(data['tricks_ties'])
     n = data['n']
         
     if format == 'html':
@@ -162,5 +169,8 @@ def get_heatmaps(format:str = "html", results_path:str = "results/results.json")
         
         # Add caption
         fig.suptitle('Cell text are formatted as follows: Chance of Win (Chance of Tie)', x=0.3, y=0.01)
-        fig.savefig('figures/heatmaps.png')
+        fig.savefig('figures/heatmaps.png', bbox_inches='tight')
+    
+    else:
+        print(f'{format} is not a valid file format. Please use \'png\' or \'html\'.')
     return
